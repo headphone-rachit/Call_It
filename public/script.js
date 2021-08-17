@@ -1,14 +1,18 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
+
 const myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
   port: '3030'
 })
+
 let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
 const peers = {}
+
+
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
@@ -23,10 +27,13 @@ navigator.mediaDevices.getUserMedia({
     })
   })
 
+  
   socket.on('user-connected', userId => {
     connectToNewUser(userId, stream)
   })
+  
   // input value
+  
   let text = $("input");
   // when press enter send message
   $('html').keydown(function (e) {
